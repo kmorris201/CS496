@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ forum.name }}
+{% endblock %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'home' %}">Forums</a>/</li>
+  <li>{{ forum.name }}</li>
+{% endblock %}
+
+{% block content %}
+{% if user.is_staff %}
+  <div class="mb-4">
+    <a href="{% url 'new_topic' forum.pk %}" class="btn btn-dark">New topic</a>
+  </div>
+{% endif %}
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Topic</th>
+        <th>Replies</th>
+        <th>Views</th>
+        <th>Last Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for topic in forum.topics.all %}
+  <tr>
+    <td><a href="{% url 'topic_posts' forum.pk topic.pk %}">{{ topic.subject }}</a></td>
+    <td>{{ topic.replies }}</td>
+    <td>{{ topic.views }}</td>
+    <td>{{ topic.last_updated }}</td>
+  </tr>
+{% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

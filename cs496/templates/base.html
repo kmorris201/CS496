@@ -1,0 +1,35 @@
+{% load static %}<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Lab Report{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Peralta" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    {% block stylesheet %}{% endblock %}
+  </head>
+  <body>
+    {% block body %}
+      <nav class="navbar navbar navbar-dark bg-danger">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'home' %}">Lab Report</a>
+		  {% if user.is_authenticated %}
+          <a style="color:white">User: {{ user.username }}</a>
+		  <br><br>
+		  <a class="nav-link" href="{% url 'logout' %}"style="color:white">Log out</a>
+		        {% else %}
+        <form class="form-inline ml-auto">
+          <a href="{% url 'login' %}" class="btn btn-secondary">Log in</a>
+          <a href="{% url 'signup' %}" class="btn btn-dark ml-2">Sign up</a>
+        </form>
+      {% endif %}
+        </div>
+      </nav>
+	  <br><br>
+      <div class="container">
+        {% block content %}
+        {% endblock %}
+      </div>
+    {% endblock body %}
+  </body>
+</html>
