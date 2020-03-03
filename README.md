@@ -1,8 +1,6 @@
 CS496 Project ReadMe
 
-####################################
 Start Up and Dependency Installation
-####################################
 
 To begin running the website, the following packages will need
 to be downloaded: python3, python3-pip, django, django-widget-tweaks.
