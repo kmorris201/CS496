@@ -16,6 +16,7 @@
 		  {% if user.is_authenticated %}
           <a style="color:white">User: {{ user.username }}</a>
 		  <br><br>
+		  <a class="nav-link" href="{% url 'test_sim:test_sim' %}"style="color:white">Test Sim</a>
 		  <a class="nav-link" href="{% url 'logout' %}"style="color:white">Log out</a>
 		        {% else %}
         <form class="form-inline ml-auto">

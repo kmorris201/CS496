@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'widget_tweaks',
     'simulation',
-    'users'
+    'users',
+    'test_sim.apps.TestSimConfig',
 ]
 
 MIDDLEWARE = [
