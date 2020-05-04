@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<!-- Could check for user teacher group memebership but would be redundent 
+	since it was already checked in the view -->
+
+	<h2>Simulations</h2>
+
+	<br>
+
+        <!-- Each simulation will have a link or button to their page with a
+         short description underneath -->
+
+        <h4><a href="{% url 'test_sim:test_sim' %}">Test Sim</a></h4>
+
+        <p>
+
+        A test simulation for the WKU Sims website, showing an example
+        of how a simulation would work an function. 
+
+        </p>
+
+	<br>
+
+        <h2>Files</h2>
+
+	<br>
+
+        <a href="{% url 'files:files' %}">Click here to manage your files.</a>
+	
+        <br>
+	
+{% else %}
+
+	<a href="{% url 'user_extension:login' %}" >Sign in</a> or <a href="{% url 'user_extension:student_registration' %}" >Register</a>
+
+{% endif %}
+
+{% endblock %}

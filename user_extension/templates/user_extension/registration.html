@@ -1,0 +1,53 @@
+{% extends 'accbase.html' %}
+
+{% block title %}Register For A WKU Sims Account{% endblock %}
+
+{% block content %}
+
+  <div class="row justify-content-center">
+
+    <div class="col-lg-8 col-md-10 col-sm-12">
+
+      <div class="card">
+
+        <div class="card-body">
+
+          <h3 class="card-title">Register New Account</h3>
+
+	  <br>
+
+          <form method="post" novalidate>
+
+            {% csrf_token %}
+
+            {% include 'includes/form.html' %}
+
+            <button type="submit" class="btn btn-primary btn-block">Create New Account</button>
+
+          </form>
+
+        </div>
+
+        <div class="card-footer text-muted text-center">
+
+          <a href="{% url 'user_extension:login' %}">Already have an account? Click here to sign in!</a>
+
+        </div>
+
+      </div>
+
+      <br>
+
+      <div class="text-center">
+
+	 <p>Teacher? Contact the website administrator at admin@wku.edu to register your account. </p>
+
+      </div>
+
+      <br>
+
+    </div>
+
+  </div>
+
+{% endblock %}

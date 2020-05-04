@@ -2,12 +2,18 @@
 
 {% block content %}
 
+{% load static %}
+
 {% if user.is_authenticated %}
+
+<h2>Test Sim</h2>
+
+<br>
 
 <form action="{%url 'test_sim:test_sim' %}" method="post">
 		{% csrf_token %}
 		<table>
-		{% for field in form %}
+		{% for field in form1 %}
 		<tr>
 			<td>{{ field.label_tag}}</td>
 			<td>{{ field }}</td>
@@ -19,16 +25,130 @@
 
 <br>
 
-{% if csv_string %}
+<!-- Should display the user inputs here. -->
 
-{{csv_string}}
+<div id="input_display">
+	Loop Radius: {{loop_radius}} <br>
+	B Zero: {{b_zero}} <br>
+	Frequency: {{f}} <br>
+	Radius: {{r}} <br>
+	Seconds Run: {{seconds}} <br>
+</div>
+
+<br>
+
+{% if pk %}
+
+<div id="data_display"></div>
+
+{% else %}
+
+<p>No simulation results to display! Please run or select a simulation to display data. </p> 
 
 {% endif %}
+
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<script>
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#data_display")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+//Read the data
+d3.csv("{% static '/media' %}{{csv}}",
+
+  // When reading the csv, I must format variables:
+  function(d){
+    return { t : d.t, a : d.a }
+  },
+
+  // Now I can use this dataset:
+  function(data) {
+
+    // Add X axis --> it is a date format
+    var x = d3.scaleLinear()
+      .domain(d3.extent(data, function(d) { return +d.t; }))
+      .range([ 0, width ]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+    // Add Y axis
+    var y = d3.scaleLinear()
+		  .domain([d3.min(data, function(d) { return +d.a; }), d3.max(data, function(d) { return +d.a; })])
+      .range([ height, 0 ]);
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+    // Add the line
+    svg.append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.t) })
+        .y(function(d) { return y(d.a) })
+        )
+
+})
+
+</script>
+
+<br>
+
+{% if pk %}
+
+<form action="{%url 'test_sim:test_sim' %}" method="post">
+	{% csrf_token %}
+	<table>
+	<tr>
+		<td>{{ form3.res_type.label_tag }}</td>
+		<td>{{ form3.res_type }}</td>
+	</tr>
+	</table>
+
+	<input type="hidden" id="id_pk" name="pk" value="{{pk}}">
+
+	<input type="submit" value="Create Resource">
+</form>
+
+<br>
+
+{% endif %}
+
+<br>
+
+<form action="{%url 'test_sim:test_sim' %}" method="post">
+	{% csrf_token %}
+	<table>
+	{% for field in form2 %}
+	<tr>
+		<td>{{ field.label_tag}}</td>
+		<td>{{ field }}</td>
+	</tr>
+	{% endfor %}
+	</table>
+	<input type="submit" value="Select">
+</form>
+
+<br>
 
 {% else %}
 
 <a href="{% url 'login' %}">Log in</a> or <a href={% url 'signup' %}> sign up </a>
+
 {% endif %}
 
 {% endblock %}
-

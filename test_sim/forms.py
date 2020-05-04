@@ -1,4 +1,5 @@
 from django import forms
+from .models import TestSim
 
 class InputForm(forms.Form):
 
@@ -7,3 +8,19 @@ class InputForm(forms.Form):
     f = forms.FloatField(label='Frequency')
     r = forms.FloatField(label='Resistence')
     seconds = forms.IntegerField(label='Number of Seconds')
+
+class InstanceForm(forms.Form):
+
+    def __init__(self, *args, user = None, **kwargs):
+        super(InstanceForm,self).__init__(*args, **kwargs)
+        self.fields['selection'] = forms.ModelChoiceField(queryset=TestSim.objects.filter(user=user))
+
+class ResourceTypeForm(forms.Form):
+
+    choices = [
+            ('line','Line')
+        ]
+
+    res_type = forms.ChoiceField(label='Resource Type To Generate', choices = choices)
+    pk = forms.IntegerField(widget = forms.HiddenInput())
+
