@@ -84,7 +84,7 @@
   		{% load static %}
 
 		testsim.style("background-image", function(d){ 
-	  		return 'url("{% static 'media/images/csv_background.png/' %}")'; 
+	  		return 'url("{% static 'media/images/csv_background.png' %}")'; 
   		});
 
   		testsim.on("click", function(d,i) {
@@ -168,6 +168,8 @@
    		color:rgba(210,210,210,1);
    		margin-top: 2px;
    		margin-bottom: 6px;
+		word-wrap: break-word;
+		width: 200px;
 	}
 	
 	.testsim h4 {
@@ -328,6 +330,8 @@
    		color:rgba(210,210,210,1);
    		margin-top: 2px;
    		margin-bottom: 6px;
+		word-wrap: break-word;
+		width: 200px;
 	}
 	
 	.testsimresource h4 {
