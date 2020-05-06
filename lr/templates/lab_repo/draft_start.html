@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<!-- Could check for teacher group membership here, but would be a little
+	redundent since it was already done in the view. -->
+	
+	<h2>Create New Lab Report Template</h2>
+
+	<br>
+
+	<form action="{% url 'lab_repo:draft_start' %}" method="post">
+		{% csrf_token %}
+		<table>
+			{% for field in form1 %}
+			<tr>
+				<td>{{field.label_tag}}</td>
+				<td>{{field}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<input type="submit" value="Create">
+	</form>
+
+	<br><br>
+
+	<h2>OR</h2>
+
+	<br><br>
+
+	<h2>Select A Draft To Continue Editing</h2>
+
+	<form action="{% url 'lab_repo:draft_start' %}" method="post">
+		{% csrf_token %}
+		<table>
+			{% for field in form2 %}
+			<tr>
+				<td>{{ field.label_tag}}</td>
+				<td>{{ field }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<input type="submit" value="Select">
+	</form>
+
+	<br><br>
+
+{% else %}
+
+	<a href="{% url 'user_extension:login' %}" >Sign in</a> or <a href="{% url 'user_extension:student_registration' %}" >Register</a>
+
+{% endif %}
+
+{% endblock %}
