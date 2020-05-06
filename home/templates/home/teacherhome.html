@@ -32,6 +32,16 @@
         <a href="{% url 'files:files' %}">Click here to manage your files.</a>
 	
         <br>
+
+	<h2>Lab Report Templates</h2>
+
+        <a href="{% url 'lab_temps:labtempdisplay' %}">Click here to view published lab report templates.</a>
+
+        <br>	
+
+	<a href="{% url 'lab_repo:draft_start' %}">Click here to create new lab report templates.</a>
+
+        <br>
 	
 {% else %}
 

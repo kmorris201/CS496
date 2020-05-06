@@ -47,13 +47,43 @@
 
 {% endif %}
 
-<h2>Lab Report Template Files</h2>
+<h2>Lab Report Draft Files</h2>
 
 <br>
 
-<p>You have no lab report template files!</p>
+{% if drafts %}
 
-<br><br>
+<div id=drafts></div>
+
+<br>
+
+{% else %}
+
+<p>You have no lab report draft files!</p>
+
+<br>
+
+{% endif %}
+
+<h2>Published Lab Report Templates</h2>
+
+<br>
+
+{% if templates %}
+
+<div id=templates></div>
+
+<br>
+
+{% else %}
+
+<p>You have no published lab report templates!</p>
+
+<br>
+
+{% endif %}
+
+<br>
 
 <script type="text/javascript">
 	
@@ -386,6 +416,339 @@
 	}
 
 </style>
+
+<script>
+	d3.json("{%url "files:labdraftjson"%}", function(data) {
+		data = JSON.parse(data)
+		
+  		grid = d3.select("#drafts")
+    			.append("div")
+    			.attr("id", "grid")
+   	 		.attr("class", "grid")
+  		;
+		
+  		drafts = grid
+    			.selectAll("div")
+    			.data(data)
+    			.enter()
+    			.append("div")
+    			.attr("class", "drafts")
+  		;
+
+  		{% load static %}
+
+		drafts.style("background-image", function(d){ 
+	  		return 'url("{% static 'media' %}' + '/images/pdf_background.png' +'")'; 
+  		});
+
+  		drafts.on("click", function(d,i) {
+	  		if(this.className.split(' ').indexOf('open') > -1) {
+		  		d3.select(this).classed("open", false);
+	  		}
+	  		else {
+		  		d3.selectAll(".drafts").classed("open", false);
+		  		d3.select(this).classed("open", true);
+	  		}
+  		});
+		
+  		metadata = drafts 
+			.append("div")
+			.attr("class","metadata");
+
+  		display = metadata
+			.append("div")
+			.attr("class", "display");
+		
+		display
+			.append("h3")
+			.text(function(d,i){return d.fields.title;})
+		;
+		
+		display 
+			.append("div")
+			.attr("class", "download")
+			.append("a")
+			.attr("href",function(d) {
+				return "{% static 'media' %}" + d.fields.draft; })
+			.attr("download",function(d) { return d.fields.draft})
+			.text("Download")
+		;
+
+		display
+			.append("div")
+			.attr("class", "delete")
+			.append("a")
+			.attr("href", function(d) {
+				return "{% url 'files:labdraftdelete' instance_id=12345 %}".replace(12345, d.pk.toString()); 
+			})
+			.text("Delete")
+		;
+
+	})
+
+</script>
+
+<style>
+	body {
+       		background-color: #FFFFFF;
+        }
+	
+	body, a {
+        	color: #000000;
+        }
+
+	.grid {
+   		display: grid;
+   		grid-gap: 10px;
+   		grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
+   		grid-auto-rows: 100px;
+		grid-auto-flow: dense;
+	}
+
+	.drafts {
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+		position: relative;
+	}
+
+	.open {
+		grid-column-end: span 2;
+		grid-row-end: span 2;
+	}
+
+	.drafts h3 {
+   		font-size: 130%;
+   		color:rgba(210,210,210,1);
+   		margin-top: 2px;
+   		margin-bottom: 6px;
+		word-wrap: break-word;
+		width: 100px;
+	}
+	
+	.drafts h4 {
+   		font-size: 100%;
+   		color:rgba(202,173,45,1);
+   		margin-top: 2px;
+   		margin-bottom: 2px;
+	}
+
+	.metadata {
+   		display: none;
+   		line-height: 80%;
+	}
+
+	.metadata .display{
+   		font-size: 80%;
+   		padding: 10px;
+   		text-align: left;
+}
+
+	.metadata span{
+   		font-size: 100%;
+   		color:rgba(210,210,210,1);
+	}
+	
+	.download{
+   		margin-top: 20px;
+	}
+
+	.download a{
+   		color:rgba(202,173,45,1);
+	}
+
+	.delete{
+                margin-top: 20px;
+        }
+
+        .delete a{
+                color:rgba(202,173,45,1);
+        }
+
+  	.open .metadata {
+   		display: block;
+   		height: 100%;
+	}
+	
+	.open .metadata{
+   		position: relative;
+   		width: 100%;
+   		height: 100%;
+   		background-color:rgba(28,28,28,0.8);
+	}
+
+</style>
+
+<script>
+	d3.json("{%url "files:labtempjson"%}", function(data) {
+		data = JSON.parse(data)
+		
+  		grid = d3.select("#templates")
+    			.append("div")
+    			.attr("id", "grid")
+   	 		.attr("class", "grid")
+  		;
+		
+  		templates = grid
+    			.selectAll("div")
+    			.data(data)
+    			.enter()
+    			.append("div")
+    			.attr("class", "templates")
+  		;
+
+  		{% load static %}
+
+		templates.style("background-image", function(d){ 
+	  		return 'url("{% static 'media' %}' + '/images/pdf_background.png' +'")'; 
+  		});
+
+  		templates.on("click", function(d,i) {
+	  		if(this.className.split(' ').indexOf('open') > -1) {
+		  		d3.select(this).classed("open", false);
+	  		}
+	  		else {
+		  		d3.selectAll(".drafts").classed("open", false);
+		  		d3.select(this).classed("open", true);
+	  		}
+  		});
+		
+  		metadata = drafts 
+			.append("div")
+			.attr("class","metadata");
+
+  		display = metadata
+			.append("div")
+			.attr("class", "display");
+		
+		display
+			.append("h3")
+			.text(function(d,i){return d.fields.title;})
+		;
+
+		display
+			.append("h4")
+			.text(function(d,i){return d.fields.description;})
+		;
+		
+		display 
+			.append("div")
+			.attr("class", "download")
+			.append("a")
+			.attr("href",function(d) {
+				return "{% static 'media' %}" + d.fields.template; })
+			.attr("download",function(d) { return d.fields.template})
+			.text("Download")
+		;
+
+		display
+			.append("div")
+			.attr("class", "delete")
+			.append("a")
+			.attr("href", function(d) {
+				return "{% url 'files:labtempdelete' instance_id=12345 %}".replace(12345, d.pk.toString()); 
+			})
+			.text("Delete")
+		;
+
+	})
+
+</script>
+
+<style>
+	body {
+       		background-color: #FFFFFF;
+        }
+	
+	body, a {
+        	color: #000000;
+        }
+
+	.grid {
+   		display: grid;
+   		grid-gap: 10px;
+   		grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
+   		grid-auto-rows: 100px;
+		grid-auto-flow: dense;
+	}
+
+	.templates {
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+		position: relative;
+	}
+
+	.open {
+		grid-column-end: span 2;
+		grid-row-end: span 2;
+	}
+
+	.templates h3 {
+   		font-size: 130%;
+   		color:rgba(210,210,210,1);
+   		margin-top: 2px;
+   		margin-bottom: 6px;
+		word-wrap: break-word;
+		width: 100px;
+	}
+	
+	.templates h4 {
+   		font-size: 100%;
+   		color:rgba(202,173,45,1);
+   		margin-top: 2px;
+   		margin-bottom: 2px;
+	}
+
+	.metadata {
+   		display: none;
+   		line-height: 80%;
+	}
+
+	.metadata .display{
+   		font-size: 80%;
+   		padding: 10px;
+   		text-align: left;
+}
+
+	.metadata span{
+   		font-size: 100%;
+   		color:rgba(210,210,210,1);
+	}
+	
+	.download{
+   		margin-top: 20px;
+	}
+
+	.download a{
+   		color:rgba(202,173,45,1);
+	}
+
+	.delete{
+                margin-top: 20px;
+        }
+
+        .delete a{
+                color:rgba(202,173,45,1);
+        }
+
+  	.open .metadata {
+   		display: block;
+   		height: 100%;
+	}
+	
+	.open .metadata{
+   		position: relative;
+   		width: 100%;
+   		height: 100%;
+   		background-color:rgba(28,28,28,0.8);
+	}
+
+</style>
+
+
+
+
 
 {% else %}
 

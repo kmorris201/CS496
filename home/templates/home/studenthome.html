@@ -36,6 +36,12 @@
 
 	<br>
 
+	<h2>Lab Report Templates</h2>
+
+	<a href="{% url 'lab_temps:labtempdisplay' %}">Click here to view published lab report templates.</a>
+
+	<br>
+
 {% else %}
 
 	<a href="{% url 'user_extension:login' %}" >Sign in</a> or <a href="{% url 'user_extension:student_registration' %}" >Register</a>
