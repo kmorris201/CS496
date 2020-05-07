@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'user_extension.apps.UserExtensionConfig',
     'files.apps.FilesConfig',
+    'lab_repo.apps.LabRepoConfig',
+    'lab_temps.apps.LabTempsConfig',
     'widget_tweaks',
     # Installed simulations go below this comment
     'test_sim.apps.TestSimConfig',

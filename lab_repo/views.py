@@ -35,17 +35,17 @@ def draft_start (request):
 
                     count = 1
 
-                    file_name = '/home/caleb/Documents/CS496/wku_sims/static/media/lab_repo_drafts/' + title.strip() + request.user.username + str(count)
+                    file_name = '/wku_sims/static/media/lab_repo_drafts/' + title.strip() + request.user.username + str(count) + '.pdf'
                     
-                    media_path = '/lab_repo_drafts/' + title.strip() + request.user.username + str(count)
+                    media_path = '/lab_repo_drafts/' + title.strip() + request.user.username + str(count) + '.pdf'
 
                     while os.path.exists(file_name):
 
                         count = count + 1
 
-                        file_name = '/home/caleb/Documents/CS496/wku_sims/static/media/lab_repo_drafts/' + title.strip() + request.user.username + str(count)
+                        file_name = '/wku_sims/static/media/lab_repo_drafts/' + title.strip() + request.user.username + str(count) + '.pdf'
                     
-                        media_path = '/lab_repo_drafts/' + title.strip() + request.user.username + str(count)
+                        media_path = '/lab_repo_drafts/' + title.strip() + request.user.username + str(count) + '.pdf'
 
                     open(file_name, 'w')
 
@@ -152,7 +152,7 @@ def draft_edit(request):
 
             media_path = draft.draft
 
-            file_name = '/home/caleb/Documents/CS496/wku_sims/static/media' + str(media_path)
+            file_name = '/wku_sims/static/media' + str(media_path)
 
             os.remove(file_name)
 
@@ -345,17 +345,17 @@ def draft_edit(request):
 
                     temp_count = 1
 
-                    template_name = '/home/caleb/Documents/CS496/wku_sims/static/media/lab_repo_templates/' + title.strip() + request.user.username + str(temp_count)
+                    template_name = '/wku_sims/static/media/lab_repo_templates/' + title.strip() + request.user.username + str(temp_count) + '.pdf'
                     
-                    template_path = '/lab_repo_templates/' + title.strip() + request.user.username + str(temp_count)
+                    template_path = '/lab_repo_templates/' + title.strip() + request.user.username + str(temp_count) + '.pdf'
 
                     while os.path.exists(template_name):
 
                         temp_count = temp_count + 1
 
-                        template_name = '/home/caleb/Documents/CS496/wku_sims/static/media/lab_repo_templates/' + title.strip() + request.user.username + str(temp_count)
+                        template_name = '/wku_sims/static/media/lab_repo_templates/' + title.strip() + request.user.username + str(temp_count) + '.pdf'
                     
-                        template_path = '/lab_repo_templates/' + title.strip() + request.user.username + str(temp_count)
+                        template_path = '/lab_repo_templates/' + title.strip() + request.user.username + str(temp_count) + '.pdf'
 
                     shutil.copy(file_name, template_name)
 
@@ -447,7 +447,7 @@ def draft_delete(request):
 
             draft = get_object_or_404(LabDraft, current="True", user = user)
 
-            path = "/home/caleb/Documents/CS496/wku_sims/static/media" + str(draft.draft)
+            path = "/wku_sims/static/media" + str(draft.draft)
 
             draft.delete()
 

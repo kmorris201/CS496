@@ -361,7 +361,7 @@
    		margin-top: 2px;
    		margin-bottom: 6px;
 		word-wrap: break-word;
-		width: 100px;
+		width: 200px;
 	}
 	
 	.testsimresource h4 {
@@ -420,7 +420,7 @@
 <script>
 	d3.json("{%url "files:labdraftjson"%}", function(data) {
 		data = JSON.parse(data)
-		
+
   		grid = d3.select("#drafts")
     			.append("div")
     			.attr("id", "grid")
@@ -523,7 +523,7 @@
    		margin-top: 2px;
    		margin-bottom: 6px;
 		word-wrap: break-word;
-		width: 100px;
+		width: 200px;
 	}
 	
 	.drafts h4 {
@@ -531,6 +531,8 @@
    		color:rgba(202,173,45,1);
    		margin-top: 2px;
    		margin-bottom: 2px;
+		word-wrap: break-word;
+		width: 200px;
 	}
 
 	.metadata {
@@ -613,7 +615,7 @@
 	  		}
   		});
 		
-  		metadata = drafts 
+  		metadata = templates 
 			.append("div")
 			.attr("class","metadata");
 
@@ -690,7 +692,7 @@
    		margin-top: 2px;
    		margin-bottom: 6px;
 		word-wrap: break-word;
-		width: 100px;
+		width: 200px;
 	}
 	
 	.templates h4 {
@@ -698,6 +700,8 @@
    		color:rgba(202,173,45,1);
    		margin-top: 2px;
    		margin-bottom: 2px;
+		word-wrap: break-word;
+		width: 200px;
 	}
 
 	.metadata {

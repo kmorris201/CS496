@@ -7,3 +7,4 @@ django-widget-tweaks
 setuptools
 python-dateutil
 pytz
+reportlab

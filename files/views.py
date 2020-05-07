@@ -33,7 +33,7 @@ def teacherDisplay(request):
 
     testsimresource = TestSimResource.objects.filter(user=user)
 
-    drafts = LabDrafts.objects.filter(user=user)
+    drafts = LabDraft.objects.filter(user=user)
 
     templates = LabTemplate.objects.filter(user=user)
 
@@ -101,7 +101,6 @@ def labDraftJson(request):
         user = get_object_or_404(User, username = request.user.username)
 
         data = serializers.serialize('json', LabDraft.objects.filter(user=user))
-
         return JsonResponse(data, safe = False)
 
     else:
@@ -123,7 +122,6 @@ def labTemplateJson(request):
         user = get_object_or_404(User, username = request.user.username)
 
         data = serializers.serialize('json', LabTemplate.objects.filter(user=user))
-
         return JsonResponse(data, safe = False)
 
     else:

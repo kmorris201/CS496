@@ -22,6 +22,8 @@ urlpatterns = [
     path('user/', include('user_extension.urls')),
     path('files/', include('files.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('labreports/', include('lab_repo.urls')),
+    path('labtemplates/', include('lab_temps.urls')),
     # Simulation urls go below this comment
     path('testsimulation/', include('test_sim.urls')),
 ]
