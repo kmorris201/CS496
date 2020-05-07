@@ -1,3 +1,5 @@
+# TODO: These imports should be optomized and unused imports 
+# removed
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from .forms import InputForm, InstanceForm, ResourceTypeForm
@@ -9,6 +11,9 @@ import pandas as pd
 import matplotlib.pylab as plt
 import numpy as np
 
+# This is the main view of the simulation, it accepts form data as 
+# input and with this input produces an instance of the experiment as
+# a model whose data will be displayed on screen in the form of a .d3 graph
 def test_sim (request):
 
     if request.user.is_authenticated:
@@ -118,6 +123,8 @@ def test_sim (request):
 
         return redirect('user_extension:login')
 
+# This view takes an instance of the simulation and produces a line graph
+# visulization from it
 def makeLineResource(request, instance_id):
 
     if request.user.is_authenticated:

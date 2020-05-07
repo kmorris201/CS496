@@ -7,6 +7,10 @@
 <!-- Could check for student group membership here, but would be a little
 	redundent since it was already done in the view. -->
 
+<!-- This file is similar to the student version, for an indepth explanation
+	of what this html before the scripts and style does please refer to
+	the student version of this html file. -->
+
 <h2>Simulation Files</h2>
 
 <br>
@@ -750,11 +754,9 @@
 
 </style>
 
-
-
-
-
 {% else %}
+
+<!-- This else should never occur, but is here for redunency. -->
 
 	<a href="{% url 'user_extension:login' %}" >Sign in</a> or <a href="{% url 'user_extension:student_registration' %}" >Register</a>
 

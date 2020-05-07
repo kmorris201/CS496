@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 
 class TestSim (models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    
+    # Variables for user input for this specific equation
     loop_radius = models.FloatField()
     b_zero = models.FloatField()
     f = models.FloatField()

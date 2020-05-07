@@ -1,9 +1,6 @@
 FROM ubuntu:latest 
-ENV PYTHONNUNBUFFERD 1
 
-#IF UISNG YTHON3.6 and apt install for pandas, numpy, matplotlib, you need
-# to also use the commond 'ENV PYTHONPATH /usr/lib/python3/dist-packages
-# so they will be installed system wide, not sure how to do for venv
+ENV PYTHONNUNBUFFERD 1
 
 RUN set -ex \
     && RUN_DEPS=" \
@@ -26,8 +23,6 @@ RUN set -ex \
 	python3 python3-pip \
     " \
     && apt-get update && apt-get install -y --no-install-recommends $BUILD_DEPS 
-#RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
-
 RUN ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime
 
 RUN apt-get install tzdata
@@ -40,20 +35,11 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 
 RUN apt-get -y install python3-numpy python3-pandas python3-matplotlib
 
-#ENV PYTHONPATH /usr/lib/python3/dist-packages
-
-    #\
-    #&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $BUILD_DEPS \
-    #&& rm -rf /var/lib/apt/lists/* 
-
-#RUN pip install -r requirements.txt
 COPY . /wku_sims/
 
 EXPOSE 8000
 
 ENV DJANGO_SETTINGS_MODULE=wku_sims.settings
-
-#RUN DATABASE_URL='db' /venv/bin/python manage.py collectstatic --noinput
 
 ENV UWSGI_WSGI_FILE=/wku_sims/wku_sims/wsgi.py
 

@@ -10,7 +10,7 @@ class Element (models.Model):
     element_type=models.CharField(max_length=100,choices=ELEMENT_TYPE_CHOICES, null="True")
     inches_blank = models.FloatField(null="True")
     text = models.CharField(max_length=10000, null = "True")
-    next_element = models.OneToOneField('self', on_delete=models.SET_NULL, null = "True")
+    next_element = models.OneToOneField('self', on_delete=models.CASCADE, null = "True")
 
 class LabDraft (models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
