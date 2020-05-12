@@ -40,6 +40,12 @@ def studentRegistration(request):
             login(user)
             return redirect('home:home')
 
+        else:
+
+            form = RegistrationForm()
+
+            return render(request, 'user_extension/registration.html', {'form':form})
+
     else:
 
         # No data, so just pass the form back to the html page be filled in 
