@@ -17,6 +17,8 @@ class InstanceForm(forms.Form):
 
 class ResourceTypeForm(forms.Form):
 
+    # When more resource types can be created, they should be added as 
+    # a choice in this form
     choices = [
             ('line','Line')
         ]

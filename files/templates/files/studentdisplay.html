@@ -7,6 +7,10 @@
 <!-- Could check for student group membership here, but would be a little
 	redundent since it was already done in the view. -->
 
+<!-- The HTML before the javascript and style check to see if their are 
+	objects to display for each file type. If there is, it creates the
+	div. Else, it displays a message saying it does not exist. -->
+
 <h2>Simulation Files</h2>
 
 <br>
@@ -388,6 +392,9 @@
 </style>
 
 {% else %}
+
+<!-- This else should never be reached, as the user is authenticated in the
+	view, but is here incase of unforseen errors in the views. -->
 
 	<a href="{% url 'user_extension:login' %}" >Sign in</a> or <a href="{% url 'user_extension:student_registration' %}" >Register</a>
 

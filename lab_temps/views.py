@@ -5,6 +5,9 @@ from django.core import serializers
 from django.contrib.auth.models import User
 from lab_repo.models import LabTemplate 
 
+# This appliction is nearly identical to the 'files' app in structure, but 
+# is limited to the LabTemplate object and displays all current 'published'
+# templates and only allows for download, not delete
 def labTempDisplay(request):
 
     if request.user.is_authenticated:

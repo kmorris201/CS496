@@ -9,6 +9,9 @@ import reportlab
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
 
+# This method initalizes a draft based on a title provided by the user or 
+# pulls a selected draft model instance and passes it to the draft_edit 
+# view for editing
 def draft_start (request):
 
     if request.user.is_authenticated:
@@ -138,6 +141,9 @@ def draft_start (request):
         
         return redirect('user_extension:login')
 
+# This view allows the user to add elements to the draft and publih it as 
+# a publicly available template as well as provide connections to the delete 
+# and publish to templates views
 def draft_edit(request):
 
     if request.user.is_authenticated:
@@ -395,6 +401,8 @@ def draft_edit(request):
 
         return redirect('user_extension:login')
 
+# The elements are ordered in a linked list, so this view follows a 
+# basic algorithim to delete an item in a linked list
 def element_delete(request, pk):
 
     if request.user.is_authenticated:
@@ -437,6 +445,7 @@ def element_delete(request, pk):
 
         return redirect('user_extension:login')
 
+# This view deletes the draft currently being edited 
 def draft_delete(request):
 
     if request.user.is_authenticated:

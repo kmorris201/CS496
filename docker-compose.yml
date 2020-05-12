@@ -9,7 +9,6 @@ services:
             POSTGRES_PASSWORD: wku_sims
   web:
     build: .
-#   command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/wku_sims
     ports:
