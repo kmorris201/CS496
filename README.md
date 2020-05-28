@@ -5,5 +5,5 @@ This is a web application that was developed to solve the problems that commonly
 Project Specifications:
 · Developed a functioning website capable of running electrical engineering lab simulations and automatically generates a lab report. After registering for an account and logging in, the professor can build a unique lab report for student users to download, edit, and submit. 
 The student user can also run virtual lab simulations on our web page. 
-· The website was developed using an agile prototype approach and implemented on an apache web server, hosted on a raspberry pi 4 inside two docker containers. I implemented Django’s web framework and connected it to a PostgreSQL database using the Python programming language. 
+· The website was developed using an agile prototype approach and implemented on an apache web server, hosted on a raspberry pi 4 inside two docker containers. We implemented Django’s web framework and connected it to a PostgreSQL database using the Python programming language. 
 This was developed as a team with Kate Morris acting as both a developer and the project manager, Caleb Kincaid as a developer, Jon Clark as a developer, and Austin White as a developer.
